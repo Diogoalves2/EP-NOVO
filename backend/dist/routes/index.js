@@ -1,0 +1,24 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const authRoutes_1 = __importDefault(require("./authRoutes"));
+const camaraRoutes_1 = __importDefault(require("./camaraRoutes"));
+const configuracoesRoutes_1 = __importDefault(require("./configuracoesRoutes"));
+const dashboardRoutes_1 = __importDefault(require("./dashboardRoutes"));
+const users_1 = __importDefault(require("./users"));
+const sessoes_1 = __importDefault(require("./sessoes"));
+const projetos_routes_1 = __importDefault(require("./projetos.routes"));
+const votosRoutes_1 = __importDefault(require("./votosRoutes"));
+const router = (0, express_1.Router)();
+router.use('/auth', authRoutes_1.default);
+router.use('/camaras', camaraRoutes_1.default);
+router.use('/configuracoes', configuracoesRoutes_1.default);
+router.use('/dashboard', dashboardRoutes_1.default);
+router.use('/users', users_1.default);
+router.use('/sessoes', sessoes_1.default);
+router.use('/projetos', projetos_routes_1.default);
+router.use('/votos', votosRoutes_1.default);
+exports.default = router;

@@ -1,0 +1,15 @@
+-- Criação da tabela projetos
+CREATE TABLE IF NOT EXISTS projetos (
+  id SERIAL PRIMARY KEY,
+  titulo VARCHAR(255) NOT NULL,
+  descricao TEXT NOT NULL,
+  autor VARCHAR(255) NOT NULL,
+  status VARCHAR(50) NOT NULL DEFAULT 'apresentado',
+  data_apresentacao TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
+  sessao_id INTEGER NOT NULL,
+  camara_id INTEGER NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
+  FOREIGN KEY (sessao_id) REFERENCES sessoes(id) ON DELETE CASCADE,
+  FOREIGN KEY (camara_id) REFERENCES camaras(id) ON DELETE CASCADE
+); 

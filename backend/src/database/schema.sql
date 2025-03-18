@@ -1,0 +1,28 @@
+CREATE TABLE IF NOT EXISTS camaras (
+  id SERIAL PRIMARY KEY,
+  nome VARCHAR(255) NOT NULL,
+  endereco VARCHAR(255) NOT NULL,
+  cidade VARCHAR(100) NOT NULL,
+  estado CHAR(2) NOT NULL,
+  cep VARCHAR(8) NOT NULL,
+  telefone VARCHAR(20) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  site VARCHAR(255),
+  logo VARCHAR(255),
+  regimento_interno VARCHAR(255),
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE OR REPLACE FUNCTION update_updated_at_column()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.updated_at = CURRENT_TIMESTAMP;
+  RETURN NEW;
+END;
+$$ language 'plpgsql';
+
+CREATE TRIGGER update_camaras_updated_at
+  BEFORE UPDATE ON camaras
+  FOR EACH ROW
+  EXECUTE FUNCTION update_updated_at_column(); 
